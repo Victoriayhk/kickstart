@@ -111,6 +111,8 @@ def main(flags, pro_id):
             os.system(run_command.format(small_file))
 
     if flags.python and pro_id != 'X':
+        if os.path.exists('src/' + pro_id + '.py'):
+            copyfile('src/' + pro_id + '.py', 'backup/' + pro_id + '.py.bak')
         copyfile('template/test.py', 'src/' + pro_id + '.py')
 
 
