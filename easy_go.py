@@ -46,11 +46,14 @@ def main(flags, pro_id):
     if flags.clear:
         # 删除源代码
         src_folder = 'src/'
-        if os.path.isdir(src_folder):
-            for src_file in os.listdir(src_folder):
-                os.remove(src_folder + src_file)
+        if not os.path.exists(src_folder):
+            os.mkdir(src_folder)
+        for src_file in os.listdir(src_folder):
+            os.remove(src_folder + src_file)
 
         # 重置源代码为模板代码, 准备数据文件夹
+        if not os.path.exists('data/'):
+            os.mkdir('data/')
         for pro in "ABCDE":
             copyfile('template/test.cpp', 'src/' + pro + '.cpp')
             data_folder = 'data/' + pro + '/'
@@ -63,6 +66,8 @@ def main(flags, pro_id):
 
         # 删除备份文件
         backup_folder = 'backup/'
+        if not os.path.exists(backup_folder):
+            os.mkdir(backup_folder)
         for backup_file in os.listdir(backup_folder):
             os.remove(backup_folder + backup_file)
 
@@ -86,8 +91,7 @@ def main(flags, pro_id):
                 run_command = 'src/' + pro_id + ' {0} {0}.out'
 
         # 确定数据文件
-        small_file = ''
-        lastest_small_file_id = 0
+        small_file_token = '0000.in'
         data_folder = 'data/' + pro_id
         for x in os.listdir(data_folder):
             if not x.endswith('.in'):
@@ -101,13 +105,14 @@ def main(flags, pro_id):
                 print run_command.format(real_x)
                 os.system(run_command.format(real_x))
             elif x.lower().find('small') >= 0 and "2" in flags.run:
-                small_file_id = int(''.join([c for c in x if c.isdigit()]))
-                if small_file_id > lastest_small_file_id:
-                    lastest_small_file_id - small_file_id
-                    small_file = real_x
+                if str(x) > small_file_token:
+                    small_file_token = str(x)
             elif x.lower().find('large') >= 0 and "3" in flags.run:
+                print run_command.format(real_x)
                 os.system(run_command.format(real_x))
+        small_file = os.path.join(data_folder, small_file_token)
         if "2" in flags.run and os.path.exists(small_file):
+            print run_command.format(small_file)
             os.system(run_command.format(small_file))
 
     if flags.python and pro_id != 'X':

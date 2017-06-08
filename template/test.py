@@ -17,10 +17,9 @@ def main(fin):
 
 with codecs.open(input_file, mode="r", encoding='utf-8') as fin:
     with codecs.open(output_file, mode="w", encoding='utf-8') as fout:
-        fout.write("hello world.py")
-        # T = int(fin.readline().strip())
-        # for cas in range(T):
-        #     ans = main(fin)
-        #     fout.write("Case #{0}: {1}\n".format(cas + 1, ans))
+        T = int(fin.readline().strip())
+        for cas in range(T):
+            ans = main(fin)
+            fout.write("Case #{0}: {1}\n".format(cas + 1, ans))
         #     out = "Case #%d: %d\n" % (cas + 1, ans)
         #     fout.write(out)

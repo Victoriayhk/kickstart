@@ -82,11 +82,9 @@ int main(int argc, char *argv[]) {
     freopen(argv[1], "r", stdin);
     freopen(argv[2], "w", stdout);
 
-    printf("hello world\n");
-
-    // int T; cin >> T; for (int cas=0; cas < T; cas++) {
-    //     int ans = -1;
-    //     printf("Case #%d: %d\n", cas+1, ans);
-    // }
+    int T; cin >> T; for (int cas=0; cas < T; cas++) {
+        int ans = -1;
+        printf("Case #%d: %d\n", cas+1, ans);
+    }
     return 0;
 }
