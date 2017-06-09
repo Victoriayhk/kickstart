@@ -54,15 +54,12 @@ def main(flags, pro_id):
         # 重置源代码为模板代码, 准备数据文件夹
         if not os.path.exists('data/'):
             os.mkdir('data/')
+        else:
+            for data_file in os.listdir(data_folder):
+                os.remove(data_folder + data_file)
         for pro in "ABCDE":
             copyfile('template/test.cpp', 'src/' + pro + '.cpp')
-            data_folder = 'data/' + pro + '/'
-            if os.path.isdir(data_folder):
-                for data_file in os.listdir(data_folder):
-                    os.remove(data_folder + data_file)
-                os.rmdir(data_folder)
-            os.mkdir(data_folder)
-            open('data/' + pro + '/sample.in', 'w').close()
+            open('data/' + pro + '-sample.in', 'w').close()
 
         # 删除备份文件
         backup_folder = 'backup/'
@@ -92,14 +89,14 @@ def main(flags, pro_id):
 
         # 确定数据文件
         small_file_token = '0000.in'
-        data_folder = 'data/' + pro_id
+        data_folder = 'data/'
         for x in os.listdir(data_folder):
-            if not x.endswith('.in'):
-                continue
+            if not x.endswith('.in') or x.find(pro_id) == -1:
+                continue;
 
             real_x = os.path.join(data_folder, x)
-            if sys.platform == "win32":
-                real_x = real_x.replace('/', '\\')
+            # if sys.platform == "win32":
+            #     real_x = real_x.replace('/', '\\')
 
             if x.lower().find("sample") >= 0 and "1" in flags.run:
                 print run_command.format(real_x)
