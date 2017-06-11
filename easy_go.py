@@ -83,34 +83,26 @@ def main(flags, pro_id):
         else:
             os.system("g++ src/{0}.cpp -o src/{0}".format(pro_id))
             if sys.platform == "win32":
-                    run_command = 'src\\' + pro_id + '.exe {0} {0}.out'
+                run_command = 'src\\' + pro_id + '.exe {0} {0}.out'
             else:
                 run_command = 'src/' + pro_id + ' {0} {0}.out'
 
         # 确定数据文件
-        small_file_token = '0000.in'
         data_folder = 'data/'
         for x in os.listdir(data_folder):
             if not x.endswith('.in') or x.find(pro_id) == -1:
                 continue;
 
             real_x = os.path.join(data_folder, x)
-            # if sys.platform == "win32":
-            #     real_x = real_x.replace('/', '\\')
-
             if x.lower().find("sample") >= 0 and "1" in flags.run:
                 print run_command.format(real_x)
                 os.system(run_command.format(real_x))
-            elif x.lower().find('small') >= 0 and "2" in flags.run:
-                if str(x) > small_file_token:
-                    small_file_token = str(x)
-            elif x.lower().find('large') >= 0 and "3" in flags.run:
+            if x.lower().find('small') >= 0 and "2" in flags.run:
                 print run_command.format(real_x)
                 os.system(run_command.format(real_x))
-        small_file = os.path.join(data_folder, small_file_token)
-        if "2" in flags.run and os.path.exists(small_file):
-            print run_command.format(small_file)
-            os.system(run_command.format(small_file))
+            if x.lower().find('large') >= 0 and "3" in flags.run:
+                print run_command.format(real_x)
+                os.system(run_command.format(real_x))
 
     if flags.python and pro_id != 'X':
         if os.path.exists('src/' + pro_id + '.py'):
