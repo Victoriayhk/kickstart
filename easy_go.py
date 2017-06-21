@@ -55,8 +55,8 @@ def main(flags, pro_id):
         if not os.path.exists('data/'):
             os.mkdir('data/')
         else:
-            for data_file in os.listdir(data_folder):
-                os.remove(data_folder + data_file)
+            for data_file in os.listdir('data/'):
+                os.remove('data/' + data_file)
         for pro in "ABCDE":
             copyfile('template/test.cpp', 'src/' + pro + '.cpp')
             open('data/' + pro + '-sample.in', 'w').close()
@@ -81,7 +81,7 @@ def main(flags, pro_id):
         if "p" in flags.run:
             run_command = 'python src/' + pro_id + '.py {0} {0}.out'
         else:
-            os.system("g++ src/{0}.cpp -o src/{0}".format(pro_id))
+            os.system("g++ -std=c++11 src/{0}.cpp -o src/{0}".format(pro_id))
             if sys.platform == "win32":
                 run_command = 'src\\' + pro_id + '.exe {0} {0}.out'
             else:

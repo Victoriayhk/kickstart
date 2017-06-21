@@ -21,10 +21,6 @@
 #include <cstring>
 using namespace std;
 
-typedef double DB;
-typedef unsigned int UI;
-typedef long long LL;
-typedef unsigned long long ULL;
 typedef pair<int, int> PII;
 typedef vector<int> VI;
 typedef vector<bool> VB;
