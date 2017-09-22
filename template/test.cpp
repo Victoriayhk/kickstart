@@ -30,13 +30,11 @@ typedef vector<string> VS;
 typedef vector<VI> VVI;
 typedef vector<PII> VPII;
 
-// 数组操作
-#define PB push_back
-#define MP make_pair
-
 // 比大小
 template <class T> inline void checkMin(T& a, T b) { if (b < a) a = b; }
 template <class T> inline void checkMax(T& a, T b) { if (b > a) a = b; }
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 // 求逆, 快速幂, 组合数, 模内四则运算, 级数
 // const int MOD = 1000000007;
@@ -74,13 +72,8 @@ template <class T> inline void checkMax(T& a, T b) { if (b > a) a = b; }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-int main(int argc, char *argv[]) {
-    freopen(argv[1], "r", stdin);
-    freopen(argv[2], "w", stdout);
 
-    int T; cin >> T; for (int cas=0; cas < T; cas++) {
-        int ans = -1;
-        printf("Case #%d: %d\n", cas+1, ans);
-    }
+int main(int argc, char *argv[]) {
+    
     return 0;
 }

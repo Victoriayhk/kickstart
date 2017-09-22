@@ -7,6 +7,16 @@ input_file = sys.argv[1]
 output_file = sys.argv[2]
 
 
+def array1(n, default_value=None):
+    arr = [None for i in range(n)]
+    return arr
+
+
+def array2(n, m, default_value=None):
+    arr = [[None for j in range(m)] for i in range(n)]
+    return arr
+
+
 def main(fin):
     # n = int(fin.readline().strip())
     # n, m = map(int, fin.readline().split())
